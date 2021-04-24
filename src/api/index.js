@@ -1,6 +1,7 @@
 const express = require('express');
 
-const emojis = require('./emojis');
+const emojisRoutes = require('./Routes/emojis');
+const authRoutes = require('./Routes/auth');
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/emojis', emojis);
+router.use('/emojis', emojisRoutes);
+router.use('/user/auth', authRoutes);
 
 module.exports = router;

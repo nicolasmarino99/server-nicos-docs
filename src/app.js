@@ -2,9 +2,20 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 require('dotenv').config();
 
+// connect to DB
+
+mongoose.connect(
+  process.env.DB_CONNECT,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => console.log('connected to db')
+);
 const middlewares = require('./middlewares');
 const api = require('./api');
 
