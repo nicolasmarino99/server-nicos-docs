@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 
 function notFound(req, res, next) {
@@ -24,7 +25,7 @@ const verifyToken = (req, res, next) => {
   try {
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     req.user = verified;
-    next(); 
+    next();
   } catch (error) {
     res.status(400).send('Invalid Token');
   }

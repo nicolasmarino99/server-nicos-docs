@@ -1,20 +1,11 @@
 const express = require('express');
 
-const emojisRoutes = require('./Routes/emojis');
-const authRoutes = require('./Routes/auth');
-const postsRoutes = require('./Routes/posts');
-
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.json({
-    message: 'API - 👋🌎🌍🌏'
-  });
-});
+const authRoutes = require('./Routes/auth');
+const postsRoutes = require('./Routes/users');
 
-router.use('/emojis', emojisRoutes);
 router.use('/user/auth', authRoutes);
-router.use('/posts', postsRoutes);
-
+router.use('/users', postsRoutes);
 
 module.exports = router;
