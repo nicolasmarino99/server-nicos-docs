@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
 
   // Check duplicates
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send({ error: 'this email is already chosen' });
+  if (emailExist) return res.status(401).send({ error: 'this email is already chosen' });
 
   // Encrypt passwords
 
@@ -31,7 +31,13 @@ router.post('/register', async (req, res) => {
     const savedUser = await user.save();
     // create and assign token
     const token = await jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    // res.header('auth-token', token).send(token);
+    res.status(202).cookie('Token', token, {
+      //sameSite: 'strict',
+      //path: '/',
+      //expires: new Date(new Date().getTime() + 100 * 1000),
+      //httpOnly: true,
+    }).send('cookie being initialaized');
   } catch (err) {
     res.status(400).send(err);
   }

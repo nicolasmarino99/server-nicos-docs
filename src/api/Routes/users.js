@@ -4,6 +4,7 @@ const { verifyToken } = require('../../middlewares');
 const User = require('../models/User');
 
 router.get('/:id', verifyToken, async (req, res) => {
+  console.log(req.params);
   const currentUser = await User.findById(req.params.id);
   try {
     if (!currentUser) return res.status(404).send('user not found');
